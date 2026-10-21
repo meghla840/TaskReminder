@@ -4,37 +4,45 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#ffe3ee">
-<title>Meghla's Partner</title>
 <meta name="apple-mobile-web-app-title" content="Meghla's Partner">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<title>Meghla's Partner</title>
 <style>
 :root{--pink:#ff7eb0;--pink2:#ffe3ee;--lav:#b9a4ff;--lav2:#efe9ff;--ink:#3a2f4f;--mut:#9a8fb0;--ok:#4cc38a;--bad:#ff6b81;--cream:#fff9fc}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+[hidden]{display:none!important}
 body{margin:0;background:#f3ecfa;font-family:ui-rounded,"SF Pro Rounded",system-ui,-apple-system,sans-serif;color:var(--ink)}
-.app{max-width:430px;margin:0 auto;min-height:100vh;background:var(--cream);position:relative;padding-bottom:110px;box-shadow:0 0 40px #b9a4ff33}
-.head{padding:max(22px,env(safe-area-inset-top)) 20px 26px;background:linear-gradient(135deg,var(--pink2),var(--lav2));border-radius:0 0 32px 32px}
-.top{display:flex;justify-content:space-between;align-items:center}
+.app{max-width:430px;margin:0 auto;min-height:100dvh;background:var(--cream);position:relative;padding-bottom:120px;box-shadow:0 0 40px #b9a4ff33}
+.head{position:relative;overflow:hidden;padding:max(22px,env(safe-area-inset-top)) 20px 26px;background:linear-gradient(135deg,var(--pink2),var(--lav2));border-radius:0 0 32px 32px;animation:down .7s cubic-bezier(.2,.8,.2,1) both}
+.top,.prog{position:relative;z-index:1}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.tl{display:flex;align-items:center;gap:10px;min-width:0}
 .hi{font-size:14px;color:var(--mut)}
-h1{margin:2px 0 0;font-size:23px}
-.top>div:first-child{min-width:0}
-.ib{width:40px;height:40px;border-radius:14px;border:0;background:#fff;font-size:18px;box-shadow:0 4px 12px #b9a4ff33;margin-left:6px}
-.prog{display:flex;align-items:center;gap:16px;margin-top:18px;background:#ffffffb8;border-radius:22px;padding:14px 16px}
-.ring{--p:0;width:64px;height:64px;border-radius:50%;background:conic-gradient(var(--pink) calc(var(--p)*1%),#fff 0);display:grid;place-items:center;flex:none;transition:.4s}
+h1{margin:2px 0 0;font-size:23px;overflow-wrap:anywhere}
+.ib{width:40px;height:40px;flex:none;border-radius:14px;border:0;background:#fff;font-size:18px;box-shadow:0 4px 12px #b9a4ff33;margin-left:6px}
+.tl .ib{margin:0;font-size:24px;color:var(--ink)}
+.prog{display:flex;align-items:center;gap:16px;margin-top:18px;background:#ffffffb8;border-radius:22px;padding:14px 16px;animation:up .6s .2s both}
+@property --p{syntax:'<number>';inherits:false;initial-value:0}
+.ring{--p:0;width:64px;height:64px;border-radius:50%;background:conic-gradient(var(--pink) calc(var(--p)*1%),#fff 0);display:grid;place-items:center;flex:none;transition:--p .9s cubic-bezier(.2,.8,.2,1)}
 .ring b{width:50px;height:50px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:15px}
 .prog p{margin:0;font-size:14px;color:var(--mut)}
 .prog strong{display:block;color:var(--ink);font-size:16px;margin-bottom:2px}
-.chips{display:flex;gap:8px;padding:16px 20px 4px;overflow-x:auto;scrollbar-width:none}
-.chip{border:0;padding:9px 16px;border-radius:999px;background:#fff;color:var(--mut);font:inherit;font-size:14px;white-space:nowrap;box-shadow:0 2px 8px #b9a4ff22}
+.chips{display:flex;gap:8px;padding:16px 20px 4px;overflow-x:auto;scrollbar-width:none;animation:up .6s .3s both}
+.chip{border:0;padding:9px 16px;border-radius:999px;background:#fff;color:var(--mut);font:inherit;font-size:14px;white-space:nowrap;box-shadow:0 2px 8px #b9a4ff22;transition:.2s}
+.chip:active{transform:scale(.9)}
 .chip.on{background:var(--pink);color:#fff}
 #msg{padding:0 22px;font-size:12px;color:var(--mut);min-height:16px;margin-top:6px}
 .sec{padding:10px 20px 0}
 .sec h3{font-size:13px;margin:14px 4px 8px;color:var(--mut);letter-spacing:.4px}
 .sec h3.over{color:var(--bad)}
-.it{display:flex;align-items:center;gap:12px;background:#fff;border-radius:20px;padding:13px 14px;margin-bottom:10px;box-shadow:0 4px 14px #b9a4ff1f;transition:transform .3s,opacity .3s}
-.in .it{animation:pop .5s cubic-bezier(.34,1.56,.64,1) both;animation-delay:calc(var(--i,0)*55ms)}
-.it.out{transform:translateX(110%);opacity:0}
-@keyframes pop{from{transform:translateY(16px) scale(.94);opacity:0}}
+.it,.ev{display:flex;align-items:center;gap:12px;background:#fff;border-radius:20px;padding:13px 14px;margin-bottom:10px;box-shadow:0 4px 14px #b9a4ff1f;transition:transform .3s,opacity .3s}
+.in .it,.in .ev{animation:pop .5s cubic-bezier(.34,1.56,.64,1) both;animation-delay:calc(var(--i,0)*55ms)}
+.out{transform:translateX(110%)!important;opacity:0}
 .cb{width:28px;height:28px;border-radius:50%;border:2.5px solid var(--lav);background:#fff;flex:none;display:grid;place-items:center;color:#fff;font-size:15px;padding:0;transition:.2s}
+.cb:active{transform:scale(.8)}
+.cb.just{animation:tick .55s cubic-bezier(.34,1.56,.64,1)}
 .it.done .cb{background:var(--ok);border-color:var(--ok);transform:scale(1.1)}
 .tx{flex:1;min-width:0}
 .nm{font-weight:600;font-size:15px;overflow-wrap:anywhere}
@@ -43,9 +51,26 @@ h1{margin:2px 0 0;font-size:23px}
 .it.done .nm{text-decoration:line-through;color:var(--mut)}
 .it.done .dt{color:var(--ok)}
 .del{border:0;background:none;font-size:15px;opacity:.45;padding:6px}
+.ev{margin:0 20px 12px;padding:16px;background:var(--bg);cursor:pointer}
+.ev:active{transform:scale(.97)}
+.em{width:52px;height:52px;border-radius:18px;background:#ffffffcc;display:grid;place-items:center;font-size:28px;flex:none}
+.ev .nm{font-size:16px}
+.bar{height:8px;border-radius:9px;background:#ffffffb0;margin-top:9px;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:9px;background:var(--ac);transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.hot{color:var(--bad);font-weight:700}
+.evs{padding-top:16px}
 .empty{text-align:center;padding:50px 20px;color:var(--mut)}
-.empty div{font-size:46px}
-.fab{position:fixed;bottom:max(24px,env(safe-area-inset-bottom));left:50%;margin-left:calc(min(215px,50vw) - 76px);width:62px;height:62px;border-radius:22px;border:0;background:linear-gradient(135deg,var(--pink),var(--lav));color:#fff;font-size:32px;box-shadow:0 10px 24px #ff7eb066;z-index:5}
+.empty div{font-size:46px;animation:bounce 1.6s ease-in-out infinite}
+.nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;height:calc(68px + env(safe-area-inset-bottom));padding-bottom:env(safe-area-inset-bottom);background:#ffffffee;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-radius:28px 28px 0 0;box-shadow:0 -6px 24px #b9a4ff33;display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;z-index:5}
+.nav button{border:0;background:none;font:inherit;font-size:11px;color:var(--mut);display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 0;transition:.2s}
+.nav button span{font-size:22px;transition:transform .25s}
+.nav button.on{color:var(--pink);font-weight:700}
+.nav button.on span{transform:translateY(-3px) scale(1.15)}
+.nav .fab{width:62px;height:62px;margin:-34px auto 0;border-radius:22px;background:linear-gradient(135deg,var(--pink),var(--lav));color:#fff;font-size:32px;padding:0;justify-content:center;animation:pulse 2.4s ease-in-out infinite;transition:transform .25s}
+.nav .fab:active{transform:scale(.88) rotate(90deg)}
+body{-webkit-user-select:none;user-select:none;overscroll-behavior-y:none;touch-action:manipulation}
+input{-webkit-user-select:text;user-select:text}
+@media(min-width:520px){body{background:linear-gradient(135deg,#ffe3ee,#e6dcff) fixed;padding:0}.app{border-radius:0;min-height:100dvh}}
 .shade{position:fixed;inset:0;background:#3a2f4f55;opacity:0;pointer-events:none;transition:.25s;z-index:8}
 .shade.on{opacity:1;pointer-events:auto}
 .sheet{position:fixed;left:50%;bottom:0;width:100%;max-width:430px;transform:translate(-50%,105%);background:#fff;border-radius:30px 30px 0 0;padding:12px 22px max(26px,env(safe-area-inset-bottom));transition:.3s;z-index:9}
@@ -56,30 +81,19 @@ h1{margin:2px 0 0;font-size:23px}
 .sheet input:focus{border-color:var(--lav)}
 .add{width:100%;padding:15px;border:0;border-radius:16px;background:linear-gradient(135deg,var(--pink),var(--lav));color:#fff;font:inherit;font-weight:700;font-size:16px;margin-top:4px}
 .add:disabled{opacity:.6}
-@property --p{syntax:'<number>';inherits:false;initial-value:0}
-.ring{transition:--p .9s cubic-bezier(.2,.8,.2,1)}
-.head{position:relative;overflow:hidden;animation:down .7s cubic-bezier(.2,.8,.2,1) both}
-.top,.prog{position:relative;z-index:1}
-@keyframes down{from{transform:translateY(-40px);opacity:0}}
 .bub{position:absolute;border-radius:50%;background:#ffffff99;animation:float 6s ease-in-out infinite}
-@keyframes float{50%{transform:translateY(-14px) scale(1.08)}}
 .hb{display:inline-block;animation:beat 1.4s ease-in-out infinite}
-@keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.3)}30%{transform:scale(1)}45%{transform:scale(1.2)}}
-.prog{animation:up .6s .2s cubic-bezier(.2,.8,.2,1) both}
-.chips{animation:up .6s .35s cubic-bezier(.2,.8,.2,1) both}
-@keyframes up{from{transform:translateY(18px);opacity:0}}
-.chip{transition:.2s}.chip:active{transform:scale(.9)}
-.cb:active{transform:scale(.8)}
-.cb.just{animation:tick .55s cubic-bezier(.34,1.56,.64,1)}
-@keyframes tick{0%{transform:scale(.6)}60%{transform:scale(1.35) rotate(12deg)}100%{transform:scale(1.1)}}
-.fab{animation:pulse 2.4s ease-in-out infinite;transition:transform .25s}
-.fab:active{transform:scale(.88) rotate(90deg)}
-@keyframes pulse{0%,100%{box-shadow:0 10px 24px #ff7eb066,0 0 0 0 #ff7eb055}50%{box-shadow:0 10px 24px #ff7eb066,0 0 0 14px #ff7eb000}}
-.empty div{animation:bounce 1.6s ease-in-out infinite}
-@keyframes bounce{50%{transform:translateY(-14px) rotate(-6deg)}}
 .pt{position:fixed;font-size:15px;pointer-events:none;z-index:20;animation:fly .85s ease-out forwards}
-@keyframes fly{to{transform:translate(var(--x),var(--y)) scale(.4) rotate(140deg);opacity:0}}
 .pt.fall{animation:fall 2.2s linear forwards}
+@keyframes pop{from{transform:translateY(16px) scale(.94);opacity:0}}
+@keyframes down{from{transform:translateY(-40px);opacity:0}}
+@keyframes up{from{transform:translateY(18px);opacity:0}}
+@keyframes float{50%{transform:translateY(-14px) scale(1.08)}}
+@keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.3)}30%{transform:scale(1)}45%{transform:scale(1.2)}}
+@keyframes tick{0%{transform:scale(.6)}60%{transform:scale(1.35) rotate(12deg)}100%{transform:scale(1.1)}}
+@keyframes pulse{0%,100%{box-shadow:0 10px 24px #ff7eb066,0 0 0 0 #ff7eb055}50%{box-shadow:0 10px 24px #ff7eb066,0 0 0 14px #ff7eb000}}
+@keyframes bounce{50%{transform:translateY(-14px) rotate(-6deg)}}
+@keyframes fly{to{transform:translate(var(--x),var(--y)) scale(.4) rotate(140deg);opacity:0}}
 @keyframes fall{to{transform:translateY(110vh) rotate(360deg)}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -87,17 +101,20 @@ h1{margin:2px 0 0;font-size:23px}
 <body>
 <div class="app">
   <div class="head">
-    <i class="bub" style="width:90px;height:90px;right:-20px;top:-20px"></i><i class="bub" style="width:46px;height:46px;left:38%;top:64px;animation-delay:-2s"></i><i class="bub" style="width:28px;height:28px;right:30%;bottom:14px;animation-delay:-4s"></i>
+    <i class="bub" style="width:90px;height:90px;right:-20px;top:-20px"></i><i class="bub" style="width:46px;height:46px;left:45%;top:64px;animation-delay:-2s"></i><i class="bub" style="width:28px;height:28px;right:30%;bottom:14px;animation-delay:-4s"></i>
     <div class="top">
-      <div><div class="hi" id="hi">Hello 🌸</div><h1>Meghla's Partner <span class="hb">💕</span></h1></div>
-      <div><button class="ib" id="sheetBtn" title="Google Sheet">📊</button><button class="ib" id="csv" title="Excel">⬇️</button></div>
+      <div class="tl">
+        <button class="ib" id="back" hidden>‹</button>
+        <div style="min-width:0"><div class="hi" id="hi"></div><h1><span id="ttl">Meghla's Partner</span> <span class="hb">💕</span></h1></div>
+      </div>
+      <button class="ib" id="csv" title="Excel (CSV) download">⬇️</button>
     </div>
     <div class="prog">
       <div class="ring" id="ring"><b id="pct">0%</b></div>
-      <p><strong id="ptitle">Kono task nei</strong><span id="psub">Notun task add korun ✨</span></p>
+      <p><strong id="ptitle"></strong><span id="psub"></span></p>
     </div>
   </div>
-  <div class="chips">
+  <div class="chips" id="chips" hidden>
     <button class="chip on" data-f="all">🌈 All</button>
     <button class="chip" data-f="pending">⏳ Pending</button>
     <button class="chip" data-f="done">✅ Done</button>
@@ -105,24 +122,28 @@ h1{margin:2px 0 0;font-size:23px}
   </div>
   <div id="msg"></div>
   <div id="list"></div>
-  <button class="fab" id="fab" aria-label="Add task">+</button>
+  <nav class="nav">
+    <button id="nHome" class="on"><span>🏠</span>Home</button>
+    <button class="fab" id="fab" aria-label="Add">+</button>
+    <button id="sheetBtn"><span>📊</span>Sheet</button>
+  </nav>
 </div>
 
 <div class="shade" id="shade"></div>
 <form class="sheet" id="sheet">
   <div class="grab"></div>
-  <h2>New task 🎀</h2>
-  <input id="task" placeholder="Ki kaj korte hobe?" required maxlength="120">
-  <input id="dl" type="datetime-local" required>
-  <button class="add" id="addBtn">Add to checklist</button>
+  <h2 id="sh2">New 🎀</h2>
+  <input id="task" required maxlength="120">
+  <input id="dl" type="datetime-local">
+  <button class="add" id="addBtn">Add</button>
 </form>
 
 <script>
 // ===== Ei duita bodle nin =====
-const API_URL   = 'https://script.google.com/macros/s/AKfycbye-darRRjsV08rk_wIqmnWLmFuDT4el5X865Vko9R6wx4TiwqbnuqOS7uxAm3DoeEzgw/exec';
-const SHEET_URL = 'https://docs.google.com/spreadsheets/d/1c665P3UuWFZB9H76P4OIXHNu7Rb8ZHbFoyDhgfHIFEc/edit?gid=0#gid=0';
+const API_URL   = 'PASTE_YOUR_WEB_APP_URL_HERE';
+const SHEET_URL = 'PASTE_YOUR_GOOGLE_SHEET_URL_HERE';
 // ==============================
-let tasks = [], filter = 'all', animNext = true, cel = null;
+let D = {events: [], tasks: []}, filter = 'all', animNext = true, cel = null, mode = 'task';
 const $ = id => document.getElementById(id);
 const msg = m => $('msg').textContent = m || '';
 const done = t => t.status === 'Done';
@@ -131,13 +152,17 @@ const tm = s => new Date(s).toLocaleTimeString([], {hour:'numeric', minute:'2-di
 const dm = s => new Date(s).toLocaleDateString([], {day:'numeric', month:'short'});
 const dayKey = s => { const d = new Date(s), n = new Date(); d.setHours(0,0,0,0); n.setHours(0,0,0,0);
   const k = Math.round((d - n) / 864e5); return k === 0 ? 'Today' : k === 1 ? 'Tomorrow' : 'Later'; };
-
-const h = new Date().getHours();
-$('hi').textContent = (h < 12 ? 'Good morning' : h < 18 ? 'Good afternoon' : 'Good evening') + ' 🌸';
+const cur = () => decodeURIComponent(location.hash.slice(1));
+const PAL = [['#ffe3ee','#ff7eb0'],['#efe9ff','#a58bff'],['#e0f5ec','#4cc38a'],['#fff1d9','#ffb347'],['#e0f0ff','#5aa9ff']];
+const EMO = ['🌸','🎀','🧸','🍓','🦋','🌙','🍰','🐣'];
+const hs = s => [...s].reduce((a, c) => (a * 31 + c.charCodeAt(0)) >>> 0, 7);
+const look = n => ({pal: PAL[hs(n) % PAL.length], em: EMO[hs(n) % EMO.length]});
+const hr = new Date().getHours();
+const greet = (hr < 12 ? 'Good morning' : hr < 18 ? 'Good afternoon' : 'Good evening') + ' 🌸';
 
 async function load() {
   msg('Loading... ✨');
-  try { tasks = await (await fetch(API_URL)).json(); msg(''); render(); }
+  try { D = await (await fetch(API_URL)).json(); msg(''); render(); }
   catch (e) { msg('API URL ta check korun 🥺'); }
 }
 async function send(b) {
@@ -148,35 +173,56 @@ async function send(b) {
 }
 
 function render() {
-  const total = tasks.length, d = tasks.filter(done).length, pct = total ? Math.round(d / total * 100) : 0;
+  const ev = D.events.find(x => x.id === cur());
+  if (cur() && !ev && D.events.length) { location.hash = ''; return; }
+  const ts = ev ? D.tasks.filter(t => t.eventId === ev.id) : D.tasks;
+  const total = ts.length, d = ts.filter(done).length, pct = total ? Math.round(d / total * 100) : 0;
+  $('back').hidden = !ev; $('chips').hidden = !ev; $('nHome').classList.toggle('on', !ev);
+  $('hi').textContent = ev ? 'Event ' + look(ev.name).em : greet;
+  $('ttl').textContent = ev ? ev.name : "Meghla's Partner";
   $('ring').style.setProperty('--p', pct); $('pct').textContent = pct + '%';
-  $('ptitle').textContent = !total ? 'Kono task nei' : d === total ? 'Shob kaj shesh! 🎉' : `${d} of ${total} done`;
-  $('psub').textContent = !total ? 'Notun task add korun ✨' : d === total ? 'Tumi darun 💖' : `${total - d} ta baki, tumi parbe 💪`;
+  $('ptitle').textContent = !total ? (ev ? 'Ei event-e kono task nei' : D.events.length + ' ta event') : d === total ? 'Shob kaj shesh! 🎉' : `${d} of ${total} done`;
+  $('psub').textContent = !total ? (ev ? 'Task add korun ✨' : 'Notun event banan ✨') : d === total ? 'Tumi darun 💖' : `${total - d} ta baki, tumi parbe 💪`;
 
-  const f = tasks.filter(t => filter === 'all' || (filter === 'pending' && !done(t)) || (filter === 'done' && done(t)) || (filter === 'over' && over(t)))
+  const all = total && d === total && ev;
+  if (cel === null) cel = all; else if (all && !cel) { cel = true; rain(); } else if (!all) cel = false;
+
+  const L = $('list'); L.innerHTML = ''; L.classList.toggle('in', animNext); animNext = false; let idx = 0;
+  if (!ev) {
+    if (!D.events.length) { L.innerHTML = '<div class="empty"><div>🧸</div><p>Prothom event ta banan</p></div>'; return; }
+    L.className += ' evs';
+    D.events.forEach(x => {
+      const t = D.tasks.filter(k => k.eventId === x.id), dn = t.filter(done).length, ov = t.filter(over).length;
+      const p = t.length ? Math.round(dn / t.length * 100) : 0, [bg, ac] = look(x.name).pal;
+      const c = document.createElement('div'); c.className = 'ev'; c.style.cssText = `--bg:${bg};--ac:${ac};--i:${idx++}`;
+      c.innerHTML = `<div class="em">${look(x.name).em}</div><div class="tx"><div class="nm"></div>
+        <div class="dt">${dn}/${t.length} tasks${ov ? ` · <span class="hot">🔥 ${ov} overdue</span>` : ''}</div><div class="bar"><i style="width:${p}%"></i></div></div><button class="del">🗑️</button>`;
+      c.querySelector('.nm').textContent = x.name;
+      c.onclick = () => location.hash = encodeURIComponent(x.id);
+      c.querySelector('.del').onclick = e => { e.stopPropagation();
+        if (confirm('Event + tar shob task delete korbo? 🥺')) { c.classList.add('out'); setTimeout(() => send({action:'deleteEvent', id:x.id}), 300); } };
+      L.appendChild(c);
+    });
+    return;
+  }
+  const f = ts.filter(t => filter === 'all' || (filter === 'pending' && !done(t)) || (filter === 'done' && done(t)) || (filter === 'over' && over(t)))
     .sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
+  if (!f.length) { L.innerHTML = '<div class="empty"><div>🧸</div><p>Ekhane kichu nei</p></div>'; return; }
   const groups = {Overdue: [], Today: [], Tomorrow: [], Later: [], Done: []};
   f.forEach(t => groups[done(t) ? 'Done' : over(t) ? 'Overdue' : dayKey(t.deadline)].push(t));
-
-  const all = total && d === total;
-  if (cel === null) cel = all; else if (all && !cel) { cel = true; rain(); } else if (!all) cel = false;
-  const L = $('list'); L.innerHTML = ''; L.classList.toggle('in', animNext); animNext = false; let idx = 0;
-  if (!f.length) { L.innerHTML = '<div class="empty"><div>🧸</div><p>Ekhane kichu nei</p></div>'; return; }
   const icons = {Overdue:'🔥', Today:'☀️', Tomorrow:'🌙', Later:'📅', Done:'✅'};
   Object.entries(groups).forEach(([name, arr]) => {
     if (!arr.length) return;
     const s = document.createElement('div'); s.className = 'sec';
     s.innerHTML = `<h3 class="${name === 'Overdue' ? 'over' : ''}">${icons[name]} ${name.toUpperCase()} · ${arr.length}</h3>`;
     arr.forEach(t => {
-      const e = document.createElement('div');
-      e.style.setProperty('--i', idx++);
+      const e = document.createElement('div'); e.style.setProperty('--i', idx++);
       e.className = 'it' + (done(t) ? ' done' : '') + (over(t) ? ' over' : '');
       e.innerHTML = `<button class="cb">${done(t) ? '✓' : ''}</button><div class="tx"><div class="nm"></div>
-        <div class="dt">${done(t) ? 'Done ' + dm(t.completedAt) + ', ' + tm(t.completedAt) : '⏰ ' + dm(t.deadline) + ', ' + tm(t.deadline)}</div></div>
-        <button class="del">🗑️</button>`;
+        <div class="dt">${done(t) ? 'Done ' + dm(t.completedAt) + ', ' + tm(t.completedAt) : '⏰ ' + dm(t.deadline) + ', ' + tm(t.deadline)}</div></div><button class="del">🗑️</button>`;
       e.querySelector('.nm').textContent = t.task;
-      e.querySelector('.cb').onclick = ev => { const b = ev.currentTarget, nd = !done(t); e.classList.toggle('done', nd); b.classList.add('just'); b.textContent = nd ? '✓' : ''; if (nd) burst(b); send({action:'toggle', id:t.id, done:nd}); };
-      e.querySelector('.del').onclick = () => { if (confirm('Delete korbo? 🥺')) { e.classList.add('out'); setTimeout(() => send({action:'delete', id:t.id}), 300); } };
+      e.querySelector('.cb').onclick = x => { const b = x.currentTarget, nd = !done(t); e.classList.toggle('done', nd); b.classList.add('just'); b.textContent = nd ? '✓' : ''; if (nd) { burst(b); navigator.vibrate && navigator.vibrate(15); } send({action:'toggle', id:t.id, done:nd}); };
+      e.querySelector('.del').onclick = () => { if (confirm('Delete korbo? 🥺')) { e.classList.add('out'); setTimeout(() => send({action:'deleteTask', id:t.id}), 300); } };
       s.appendChild(e);
     });
     L.appendChild(s);
@@ -200,25 +246,55 @@ function rain() {
     document.body.appendChild(p); setTimeout(() => p.remove(), 3200);
   }
 }
+
 const open = o => { $('sheet').classList.toggle('on', o); $('shade').classList.toggle('on', o); if (o) setTimeout(() => $('task').focus(), 300); };
-$('fab').onclick = () => open(true);
+$('fab').onclick = () => {
+  mode = cur() ? 'task' : 'event';
+  $('sh2').textContent = mode === 'event' ? 'New event 🎀' : 'New task 🎀';
+  $('task').placeholder = mode === 'event' ? 'Event-er naam (jemon: Eid Party)' : 'Ki kaj korte hobe?';
+  $('dl').hidden = mode === 'event'; $('dl').required = mode === 'task';
+  $('addBtn').textContent = mode === 'event' ? 'Create event' : 'Add to checklist';
+  open(true);
+};
 $('shade').onclick = () => open(false);
 $('sheet').onsubmit = async e => {
   e.preventDefault(); $('addBtn').disabled = true;
-  const b = {action:'add', task:$('task').value.trim(), deadline:new Date($('dl').value).toISOString()};
-  open(false); $('sheet').reset(); await send(b); $('addBtn').disabled = false;
+  const v = $('task').value.trim();
+  const b = mode === 'event' ? {action:'addEvent', name:v} : {action:'addTask', eventId:cur(), task:v, deadline:new Date($('dl').value).toISOString()};
+  open(false); $('sheet').reset(); animNext = true; await send(b); $('addBtn').disabled = false;
 };
 document.querySelectorAll('.chip').forEach(c => c.onclick = () => {
-  filter = c.dataset.f; animNext = true; document.querySelectorAll('.chip').forEach(x => x.classList.toggle('on', x === c)); render();
+  filter = c.dataset.f; animNext = true;
+  document.querySelectorAll('.chip').forEach(x => x.classList.toggle('on', x === c)); render();
 });
+$('back').onclick = () => location.hash = '';
+$('nHome').onclick = () => { if (cur()) location.hash = ''; else scrollTo({top:0, behavior:'smooth'}); };
+window.onhashchange = () => {
+  animNext = true; cel = null; filter = 'all';
+  document.querySelectorAll('.chip').forEach((x, i) => x.classList.toggle('on', i === 0));
+  scrollTo(0, 0); render();
+};
 $('sheetBtn').onclick = () => window.open(SHEET_URL, '_blank');
 $('csv').onclick = () => {
-  const rows = [['Task','Deadline','Status','Completed At'], ...tasks.map(t => [t.task, t.deadline, t.status, t.completedAt])];
+  const rows = [['Event','Task','Deadline','Status','Completed At'], ...D.tasks.map(t => [t.event, t.task, t.deadline, t.status, t.completedAt])];
   const csv = rows.map(r => r.map(c => '"' + String(c ?? '').replace(/"/g, '""') + '"').join(',')).join('\n');
   const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['\ufeff' + csv], {type:'text/csv'}));
-  a.download = 'tasks.csv'; a.click();
+  a.download = 'meghlas-partner-tasks.csv'; a.click();
 };
-load();
+// ===== Installable app icon + manifest =====
+(function () {
+  const c = document.createElement('canvas'); c.width = c.height = 512;
+  const x = c.getContext('2d'), g = x.createLinearGradient(0, 0, 512, 512);
+  g.addColorStop(0, '#ff7eb0'); g.addColorStop(1, '#b9a4ff'); x.fillStyle = g; x.fillRect(0, 0, 512, 512);
+  x.font = '280px serif'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText('💕', 256, 285);
+  const u = c.toDataURL('image/png');
+  const a = document.createElement('link'); a.rel = 'apple-touch-icon'; a.href = u; document.head.appendChild(a);
+  const m = {name:"Meghla's Partner", short_name:'Partner', start_url:location.href.split('#')[0], display:'standalone',
+    background_color:'#fff9fc', theme_color:'#ffe3ee', icons:[{src:u, sizes:'512x512', type:'image/png'}]};
+  const k = document.createElement('link'); k.rel = 'manifest';
+  k.href = URL.createObjectURL(new Blob([JSON.stringify(m)], {type:'application/manifest+json'})); document.head.appendChild(k);
+})();
+render(); load();
 </script>
 </body>
 </html>
