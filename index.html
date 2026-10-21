@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffe3ee">
+<title>Meghla's Partner</title>
+<meta name="apple-mobile-web-app-title" content="Meghla's Partner">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<style>
+:root{--pink:#ff7eb0;--pink2:#ffe3ee;--lav:#b9a4ff;--lav2:#efe9ff;--ink:#3a2f4f;--mut:#9a8fb0;--ok:#4cc38a;--bad:#ff6b81;--cream:#fff9fc}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:#f3ecfa;font-family:ui-rounded,"SF Pro Rounded",system-ui,-apple-system,sans-serif;color:var(--ink)}
+.app{max-width:430px;margin:0 auto;min-height:100vh;background:var(--cream);position:relative;padding-bottom:110px;box-shadow:0 0 40px #b9a4ff33}
+.head{padding:max(22px,env(safe-area-inset-top)) 20px 26px;background:linear-gradient(135deg,var(--pink2),var(--lav2));border-radius:0 0 32px 32px}
+.top{display:flex;justify-content:space-between;align-items:center}
+.hi{font-size:14px;color:var(--mut)}
+h1{margin:2px 0 0;font-size:23px}
+.top>div:first-child{min-width:0}
+.ib{width:40px;height:40px;border-radius:14px;border:0;background:#fff;font-size:18px;box-shadow:0 4px 12px #b9a4ff33;margin-left:6px}
+.prog{display:flex;align-items:center;gap:16px;margin-top:18px;background:#ffffffb8;border-radius:22px;padding:14px 16px}
+.ring{--p:0;width:64px;height:64px;border-radius:50%;background:conic-gradient(var(--pink) calc(var(--p)*1%),#fff 0);display:grid;place-items:center;flex:none;transition:.4s}
+.ring b{width:50px;height:50px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:15px}
+.prog p{margin:0;font-size:14px;color:var(--mut)}
+.prog strong{display:block;color:var(--ink);font-size:16px;margin-bottom:2px}
+.chips{display:flex;gap:8px;padding:16px 20px 4px;overflow-x:auto;scrollbar-width:none}
+.chip{border:0;padding:9px 16px;border-radius:999px;background:#fff;color:var(--mut);font:inherit;font-size:14px;white-space:nowrap;box-shadow:0 2px 8px #b9a4ff22}
+.chip.on{background:var(--pink);color:#fff}
+#msg{padding:0 22px;font-size:12px;color:var(--mut);min-height:16px;margin-top:6px}
+.sec{padding:10px 20px 0}
+.sec h3{font-size:13px;margin:14px 4px 8px;color:var(--mut);letter-spacing:.4px}
+.sec h3.over{color:var(--bad)}
+.it{display:flex;align-items:center;gap:12px;background:#fff;border-radius:20px;padding:13px 14px;margin-bottom:10px;box-shadow:0 4px 14px #b9a4ff1f;transition:transform .3s,opacity .3s}
+.in .it{animation:pop .5s cubic-bezier(.34,1.56,.64,1) both;animation-delay:calc(var(--i,0)*55ms)}
+.it.out{transform:translateX(110%);opacity:0}
+@keyframes pop{from{transform:translateY(16px) scale(.94);opacity:0}}
+.cb{width:28px;height:28px;border-radius:50%;border:2.5px solid var(--lav);background:#fff;flex:none;display:grid;place-items:center;color:#fff;font-size:15px;padding:0;transition:.2s}
+.it.done .cb{background:var(--ok);border-color:var(--ok);transform:scale(1.1)}
+.tx{flex:1;min-width:0}
+.nm{font-weight:600;font-size:15px;overflow-wrap:anywhere}
+.dt{font-size:12px;color:var(--mut);margin-top:3px}
+.it.over .dt{color:var(--bad);font-weight:600}
+.it.done .nm{text-decoration:line-through;color:var(--mut)}
+.it.done .dt{color:var(--ok)}
+.del{border:0;background:none;font-size:15px;opacity:.45;padding:6px}
+.empty{text-align:center;padding:50px 20px;color:var(--mut)}
+.empty div{font-size:46px}
+.fab{position:fixed;bottom:max(24px,env(safe-area-inset-bottom));left:50%;margin-left:calc(min(215px,50vw) - 76px);width:62px;height:62px;border-radius:22px;border:0;background:linear-gradient(135deg,var(--pink),var(--lav));color:#fff;font-size:32px;box-shadow:0 10px 24px #ff7eb066;z-index:5}
+.shade{position:fixed;inset:0;background:#3a2f4f55;opacity:0;pointer-events:none;transition:.25s;z-index:8}
+.shade.on{opacity:1;pointer-events:auto}
+.sheet{position:fixed;left:50%;bottom:0;width:100%;max-width:430px;transform:translate(-50%,105%);background:#fff;border-radius:30px 30px 0 0;padding:12px 22px max(26px,env(safe-area-inset-bottom));transition:.3s;z-index:9}
+.sheet.on{transform:translate(-50%,0)}
+.grab{width:44px;height:5px;border-radius:9px;background:var(--lav2);margin:0 auto 16px}
+.sheet h2{margin:0 0 14px;font-size:20px}
+.sheet input{width:100%;padding:14px;margin-bottom:10px;border:2px solid var(--lav2);border-radius:16px;font:inherit;color:var(--ink);background:var(--cream);outline:0}
+.sheet input:focus{border-color:var(--lav)}
+.add{width:100%;padding:15px;border:0;border-radius:16px;background:linear-gradient(135deg,var(--pink),var(--lav));color:#fff;font:inherit;font-weight:700;font-size:16px;margin-top:4px}
+.add:disabled{opacity:.6}
+@property --p{syntax:'<number>';inherits:false;initial-value:0}
+.ring{transition:--p .9s cubic-bezier(.2,.8,.2,1)}
+.head{position:relative;overflow:hidden;animation:down .7s cubic-bezier(.2,.8,.2,1) both}
+.top,.prog{position:relative;z-index:1}
+@keyframes down{from{transform:translateY(-40px);opacity:0}}
+.bub{position:absolute;border-radius:50%;background:#ffffff99;animation:float 6s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-14px) scale(1.08)}}
+.hb{display:inline-block;animation:beat 1.4s ease-in-out infinite}
+@keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.3)}30%{transform:scale(1)}45%{transform:scale(1.2)}}
+.prog{animation:up .6s .2s cubic-bezier(.2,.8,.2,1) both}
+.chips{animation:up .6s .35s cubic-bezier(.2,.8,.2,1) both}
+@keyframes up{from{transform:translateY(18px);opacity:0}}
+.chip{transition:.2s}.chip:active{transform:scale(.9)}
+.cb:active{transform:scale(.8)}
+.cb.just{animation:tick .55s cubic-bezier(.34,1.56,.64,1)}
+@keyframes tick{0%{transform:scale(.6)}60%{transform:scale(1.35) rotate(12deg)}100%{transform:scale(1.1)}}
+.fab{animation:pulse 2.4s ease-in-out infinite;transition:transform .25s}
+.fab:active{transform:scale(.88) rotate(90deg)}
+@keyframes pulse{0%,100%{box-shadow:0 10px 24px #ff7eb066,0 0 0 0 #ff7eb055}50%{box-shadow:0 10px 24px #ff7eb066,0 0 0 14px #ff7eb000}}
+.empty div{animation:bounce 1.6s ease-in-out infinite}
+@keyframes bounce{50%{transform:translateY(-14px) rotate(-6deg)}}
+.pt{position:fixed;font-size:15px;pointer-events:none;z-index:20;animation:fly .85s ease-out forwards}
+@keyframes fly{to{transform:translate(var(--x),var(--y)) scale(.4) rotate(140deg);opacity:0}}
+.pt.fall{animation:fall 2.2s linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="head">
+    <i class="bub" style="width:90px;height:90px;right:-20px;top:-20px"></i><i class="bub" style="width:46px;height:46px;left:38%;top:64px;animation-delay:-2s"></i><i class="bub" style="width:28px;height:28px;right:30%;bottom:14px;animation-delay:-4s"></i>
+    <div class="top">
+      <div><div class="hi" id="hi">Hello 🌸</div><h1>Meghla's Partner <span class="hb">💕</span></h1></div>
+      <div><button class="ib" id="sheetBtn" title="Google Sheet">📊</button><button class="ib" id="csv" title="Excel">⬇️</button></div>
+    </div>
+    <div class="prog">
+      <div class="ring" id="ring"><b id="pct">0%</b></div>
+      <p><strong id="ptitle">Kono task nei</strong><span id="psub">Notun task add korun ✨</span></p>
+    </div>
+  </div>
+  <div class="chips">
+    <button class="chip on" data-f="all">🌈 All</button>
+    <button class="chip" data-f="pending">⏳ Pending</button>
+    <button class="chip" data-f="done">✅ Done</button>
+    <button class="chip" data-f="over">🔥 Overdue</button>
+  </div>
+  <div id="msg"></div>
+  <div id="list"></div>
+  <button class="fab" id="fab" aria-label="Add task">+</button>
+</div>
+
+<div class="shade" id="shade"></div>
+<form class="sheet" id="sheet">
+  <div class="grab"></div>
+  <h2>New task 🎀</h2>
+  <input id="task" placeholder="Ki kaj korte hobe?" required maxlength="120">
+  <input id="dl" type="datetime-local" required>
+  <button class="add" id="addBtn">Add to checklist</button>
+</form>
+
+<script>
+// ===== Ei duita bodle nin =====
+const API_URL   = 'https://script.google.com/macros/s/AKfycbye-darRRjsV08rk_wIqmnWLmFuDT4el5X865Vko9R6wx4TiwqbnuqOS7uxAm3DoeEzgw/exec';
+const SHEET_URL = 'https://docs.google.com/spreadsheets/d/1c665P3UuWFZB9H76P4OIXHNu7Rb8ZHbFoyDhgfHIFEc/edit?gid=0#gid=0';
+// ==============================
+let tasks = [], filter = 'all', animNext = true, cel = null;
+const $ = id => document.getElementById(id);
+const msg = m => $('msg').textContent = m || '';
+const done = t => t.status === 'Done';
+const over = t => !done(t) && new Date(t.deadline) < new Date();
+const tm = s => new Date(s).toLocaleTimeString([], {hour:'numeric', minute:'2-digit'});
+const dm = s => new Date(s).toLocaleDateString([], {day:'numeric', month:'short'});
+const dayKey = s => { const d = new Date(s), n = new Date(); d.setHours(0,0,0,0); n.setHours(0,0,0,0);
+  const k = Math.round((d - n) / 864e5); return k === 0 ? 'Today' : k === 1 ? 'Tomorrow' : 'Later'; };
+
+const h = new Date().getHours();
+$('hi').textContent = (h < 12 ? 'Good morning' : h < 18 ? 'Good afternoon' : 'Good evening') + ' 🌸';
+
+async function load() {
+  msg('Loading... ✨');
+  try { tasks = await (await fetch(API_URL)).json(); msg(''); render(); }
+  catch (e) { msg('API URL ta check korun 🥺'); }
+}
+async function send(b) {
+  msg('Saving... 💾');
+  try { const j = await (await fetch(API_URL, {method:'POST', body:JSON.stringify(b)})).json(); if (!j.ok) msg('Error: ' + j.error); }
+  catch (e) { msg('Save hoyni 🥺'); }
+  await load();
+}
+
+function render() {
+  const total = tasks.length, d = tasks.filter(done).length, pct = total ? Math.round(d / total * 100) : 0;
+  $('ring').style.setProperty('--p', pct); $('pct').textContent = pct + '%';
+  $('ptitle').textContent = !total ? 'Kono task nei' : d === total ? 'Shob kaj shesh! 🎉' : `${d} of ${total} done`;
+  $('psub').textContent = !total ? 'Notun task add korun ✨' : d === total ? 'Tumi darun 💖' : `${total - d} ta baki, tumi parbe 💪`;
+
+  const f = tasks.filter(t => filter === 'all' || (filter === 'pending' && !done(t)) || (filter === 'done' && done(t)) || (filter === 'over' && over(t)))
+    .sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
+  const groups = {Overdue: [], Today: [], Tomorrow: [], Later: [], Done: []};
+  f.forEach(t => groups[done(t) ? 'Done' : over(t) ? 'Overdue' : dayKey(t.deadline)].push(t));
+
+  const all = total && d === total;
+  if (cel === null) cel = all; else if (all && !cel) { cel = true; rain(); } else if (!all) cel = false;
+  const L = $('list'); L.innerHTML = ''; L.classList.toggle('in', animNext); animNext = false; let idx = 0;
+  if (!f.length) { L.innerHTML = '<div class="empty"><div>🧸</div><p>Ekhane kichu nei</p></div>'; return; }
+  const icons = {Overdue:'🔥', Today:'☀️', Tomorrow:'🌙', Later:'📅', Done:'✅'};
+  Object.entries(groups).forEach(([name, arr]) => {
+    if (!arr.length) return;
+    const s = document.createElement('div'); s.className = 'sec';
+    s.innerHTML = `<h3 class="${name === 'Overdue' ? 'over' : ''}">${icons[name]} ${name.toUpperCase()} · ${arr.length}</h3>`;
+    arr.forEach(t => {
+      const e = document.createElement('div');
+      e.style.setProperty('--i', idx++);
+      e.className = 'it' + (done(t) ? ' done' : '') + (over(t) ? ' over' : '');
+      e.innerHTML = `<button class="cb">${done(t) ? '✓' : ''}</button><div class="tx"><div class="nm"></div>
+        <div class="dt">${done(t) ? 'Done ' + dm(t.completedAt) + ', ' + tm(t.completedAt) : '⏰ ' + dm(t.deadline) + ', ' + tm(t.deadline)}</div></div>
+        <button class="del">🗑️</button>`;
+      e.querySelector('.nm').textContent = t.task;
+      e.querySelector('.cb').onclick = ev => { const b = ev.currentTarget, nd = !done(t); e.classList.toggle('done', nd); b.classList.add('just'); b.textContent = nd ? '✓' : ''; if (nd) burst(b); send({action:'toggle', id:t.id, done:nd}); };
+      e.querySelector('.del').onclick = () => { if (confirm('Delete korbo? 🥺')) { e.classList.add('out'); setTimeout(() => send({action:'delete', id:t.id}), 300); } };
+      s.appendChild(e);
+    });
+    L.appendChild(s);
+  });
+}
+
+function burst(el) {
+  const r = el.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2, em = ['💖','✨','🌸','⭐','🎀'];
+  for (let i = 0; i < 10; i++) {
+    const p = document.createElement('span'), a = Math.random() * 6.28, d = 40 + Math.random() * 50;
+    p.className = 'pt'; p.textContent = em[i % 5];
+    p.style.cssText = `left:${cx}px;top:${cy}px;--x:${Math.cos(a) * d}px;--y:${Math.sin(a) * d - 30}px`;
+    document.body.appendChild(p); setTimeout(() => p.remove(), 900);
+  }
+}
+function rain() {
+  for (let i = 0; i < 30; i++) {
+    const p = document.createElement('span');
+    p.className = 'pt fall'; p.textContent = ['🎉','💖','✨','🌸','🎀'][i % 5];
+    p.style.cssText = `left:${Math.random() * 100}vw;top:-30px;font-size:${16 + Math.random() * 14}px;animation-delay:${Math.random() * .8}s`;
+    document.body.appendChild(p); setTimeout(() => p.remove(), 3200);
+  }
+}
+const open = o => { $('sheet').classList.toggle('on', o); $('shade').classList.toggle('on', o); if (o) setTimeout(() => $('task').focus(), 300); };
+$('fab').onclick = () => open(true);
+$('shade').onclick = () => open(false);
+$('sheet').onsubmit = async e => {
+  e.preventDefault(); $('addBtn').disabled = true;
+  const b = {action:'add', task:$('task').value.trim(), deadline:new Date($('dl').value).toISOString()};
+  open(false); $('sheet').reset(); await send(b); $('addBtn').disabled = false;
+};
+document.querySelectorAll('.chip').forEach(c => c.onclick = () => {
+  filter = c.dataset.f; animNext = true; document.querySelectorAll('.chip').forEach(x => x.classList.toggle('on', x === c)); render();
+});
+$('sheetBtn').onclick = () => window.open(SHEET_URL, '_blank');
+$('csv').onclick = () => {
+  const rows = [['Task','Deadline','Status','Completed At'], ...tasks.map(t => [t.task, t.deadline, t.status, t.completedAt])];
+  const csv = rows.map(r => r.map(c => '"' + String(c ?? '').replace(/"/g, '""') + '"').join(',')).join('\n');
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['\ufeff' + csv], {type:'text/csv'}));
+  a.download = 'tasks.csv'; a.click();
+};
+load();
+</script>
+</body>
+</html>
